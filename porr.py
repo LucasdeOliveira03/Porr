@@ -7,7 +7,7 @@ from phrase import load_phrase
 
 
 load_dotenv()
-info = "porr.json"
+info = "counter.json"
 
 intents = discord.Intents.default()
 intents.message_content = True  
