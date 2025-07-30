@@ -1,4 +1,22 @@
 import random
+import json
+
+info = "last.json"
+
+def loadLast():
+    try:
+        with open(info, "r") as file:
+            data = json.load(file)
+            return data.get("last", 0)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return 0
+
+def saveLast(value):
+    with open(info, "w") as file:
+        json.dump({"last": value}, file)
+
+last = loadLast()
+
 
 def load_phrase(counter):
     phrase = [
@@ -38,5 +56,11 @@ def load_phrase(counter):
     ]
 
     i = random.randrange(0, len(phrase))
+
+    while i == last:
+        i = random.randrange(0, len(phrase))
+
+    saveLast(i)
+
 
     return(phrase[i])
